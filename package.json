@@ -1,6 +1,6 @@
 {
   "name": "ember-formatted-number",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Extends regular Ember TextField to automatically add commas to numbers.",
   "directories": {
     "doc": "doc",
