@@ -15,7 +15,8 @@ export default Ember.TextField.extend( {
         }
     }.observes( 'value' ),
 
-    didInsertElement: function(){
+    init: function(){
+	this._super();
         if( this.get( 'realValue' ) === null || this.get( 'realValue' ) === undefined ){
             this.set( 'realValue', 0 );
         }
