@@ -7,7 +7,9 @@ export default Ember.TextField.extend( {
     addComma: function(){
         var numberValue = Number( this.get( 'value' ).toString().replace( /,/g, '' ) );
         if( !isNaN( numberValue ) ){
-            this.set( 'value', locale.format( numberValue.toString(), 'n2' ) );
+            var z = parseFloat(Math.round(numberValue * 100) / 100).toFixed(2);
+            this.set( 'value', z );
+            //this.set( 'value', locale.format( numberValue, 'n2' ) );
             //this.set( 'value', numberValue.toString().replace( /\B(?=(\d{3})+(?!\d))/g, "," ) );
             this.set( 'realValue', numberValue );
         }
