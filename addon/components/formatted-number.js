@@ -1,5 +1,4 @@
 import Ember from 'ember';
-var locale = new Globalize( navigator.language );
 
 export default Ember.TextField.extend( {
     originalValue: '',
@@ -7,8 +6,16 @@ export default Ember.TextField.extend( {
     addComma: function(){
         var numberValue = Number( this.get( 'value' ).toString().replace( /,/g, '' ) );
         if( !isNaN( numberValue ) ){
-            this.set( 'value', locale.format( numberValue.toString(), 'n2' ) );
-            //this.set( 'value', numberValue.toString().replace( /\B(?=(\d{3})+(?!\d))/g, "," ) );
+            var input = this.get( 'value' ).replace( /,/g, '' );
+            var parts = input.split( '.' );
+            var part1 = parts[ 0 ].replace( /(\d)(?=(\d\d\d)+(?!\d))/g, "$1," );
+            var part2 = '';
+            if( parts.length > 1 ){
+                part2 = '.'
+                part2 += parts[ 1 ] ? parts[ 1 ] : '';
+            }
+
+            this.set( 'value', part1 + part2 );
             this.set( 'realValue', numberValue );
         }
         else{
